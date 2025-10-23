@@ -1,0 +1,13 @@
+-- Table: marque
+-- Règles simples : id auto-incrémenté, nom unique, timestamps utiles
+CREATE TABLE IF NOT EXISTS marque (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(100) NOT NULL,
+  site_web VARCHAR(255) NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_marque_nom (nom)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_general_ci;
