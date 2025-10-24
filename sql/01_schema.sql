@@ -54,3 +54,22 @@ CREATE TABLE IF NOT EXISTS boisson (
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
+
+-- Table: focaccia_ingredient
+-- Association N–N entre focaccia et ingredient, avec attribut quantite
+CREATE TABLE IF NOT EXISTS focaccia_ingredient (
+  focaccia_id BIGINT UNSIGNED NOT NULL,
+  ingredient_id BIGINT UNSIGNED NOT NULL,
+  quantite INT NULL,
+  PRIMARY KEY (focaccia_id, ingredient_id),
+  CONSTRAINT fk_fi_focaccia
+    FOREIGN KEY (focaccia_id) REFERENCES focaccia(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT fk_fi_ingredient
+    FOREIGN KEY (ingredient_id) REFERENCES ingredient(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_general_ci;
