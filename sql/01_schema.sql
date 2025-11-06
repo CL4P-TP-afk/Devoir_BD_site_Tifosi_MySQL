@@ -1,4 +1,4 @@
--- Table: marque
+-- 1 Table: marque
 -- Règles simples : id auto-incrémenté, nom unique, timestamps utiles
 CREATE TABLE IF NOT EXISTS marque (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS marque (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
--- Table: ingredient
+--2 Table: ingredient
 CREATE TABLE IF NOT EXISTS ingredient (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom VARCHAR(50) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS ingredient (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
--- Table: focaccia
+--3 Table: focaccia
 CREATE TABLE IF NOT EXISTS focaccia (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom VARCHAR(50) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS focaccia (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
--- Table: boisson
+--4 Table: boisson
 CREATE TABLE IF NOT EXISTS boisson (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom VARCHAR(50) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS boisson (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
--- Table: focaccia_ingredient
+--5 Table: focaccia_ingredient
 -- Association N–N entre focaccia et ingredient, avec attribut quantite
 CREATE TABLE IF NOT EXISTS focaccia_ingredient (
   focaccia_id BIGINT UNSIGNED NOT NULL,
@@ -73,3 +73,84 @@ CREATE TABLE IF NOT EXISTS focaccia_ingredient (
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
+
+-- 6 Table: client
+CREATE TABLE IF NOT EXISTS client (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(50) NOT NULL,
+  email VARCHAR(150) NOT NULL,
+  code_postal VARCHAR(10) NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_client_email (email)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_general_ci;
+
+-- 7 Table: menu 
+CREATE TABLE IF NOT EXISTS menu (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(50) NOT NULL,
+  prix DECIMAL(5,2) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_menu_nom (nom)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_general_ci;
+/* menu_id est NULL pour ne pas casser les données actuelles (table menu vide).
+Quand la table menu auras des menus, on passe cette colonne en NOT NULL */
+ALTER TABLE focaccia
+  ADD COLUMN IF NOT EXISTS menu_id BIGINT UNSIGNED NULL;
+
+ALTER TABLE focaccia
+  ADD CONSTRAINT fk_focaccia_menu
+    FOREIGN KEY (menu_id) REFERENCES menu(id)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL;
+
+-- 8 Table: menu_boisson
+-- Association N–N entre menu et boisson
+CREATE TABLE IF NOT EXISTS menu_boisson (
+  menu_id BIGINT UNSIGNED NOT NULL,
+  boisson_id BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (menu_id, boisson_id),
+  KEY idx_mb_boisson (boisson_id),
+  CONSTRAINT fk_mb_menu
+    FOREIGN KEY (menu_id) REFERENCES menu(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT fk_mb_boisson
+    FOREIGN KEY (boisson_id) REFERENCES boisson(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_general_ci;
+
+-- 9 Table: achat
+-- Association N–N entre client et menu , porteuse d'attribut date_achat
+CREATE TABLE IF NOT EXISTS achat (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  client_id BIGINT UNSIGNED NOT NULL,
+  menu_id BIGINT UNSIGNED NOT NULL,
+  date_achat DATE NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_achat_client (client_id),
+  KEY idx_achat_menu (menu_id),
+  KEY idx_achat_date (date_achat),
+  CONSTRAINT fk_achat_client
+    FOREIGN KEY (client_id) REFERENCES client(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+  CONSTRAINT fk_achat_menu
+    FOREIGN KEY (menu_id) REFERENCES menu(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_general_ci;
+
