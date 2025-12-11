@@ -1,0 +1,13 @@
+127.0.0.1/tifosi/focaccia/		http://localhost/phpmyadmin/index.php?route=/database/sql&db=tifosi
+La requête SQL a été exécutée avec succès.
+
+SELECT f.nom, COUNT(fi.ingredient_id) AS nb
+FROM focaccia f
+JOIN focaccia_ingredient fi ON fi.focaccia_id = f.id
+GROUP BY f.id
+ORDER BY nb DESC
+LIMIT 1;
+
+
+
+Paysanne	12	

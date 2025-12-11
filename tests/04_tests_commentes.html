@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>04_tests_commentes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E2%9C%94%EF%B8%8F-tests-sql-comment%C3%A9s--base-tifosi">✔️ Tests SQL commentés — Base Tifosi</h1>
+<p>Ce document regroupe les 10 requêtes demandées, avec pour chacune :</p>
+<ul>
+<li>le but de la requête,</li>
+<li>le code SQL exécuté,</li>
+<li>le résultat attendu (théorique),</li>
+<li>le résultat obtenu (preuves exportées),</li>
+<li>un commentaire sur la cohérence ou les éventuels écarts.</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%A7%A9-test-01--afficher-la-liste-des-noms-des-focaccias-par-ordre-alphab%C3%A9tique-croissant">🧩 Test 01 — Afficher la liste des noms des focaccias par ordre alphabétique croissant</h2>
+<ul>
+<li>
+<p>But : Vérifier que la table <code>focaccia</code> est correctement peuplée et que les données peuvent être triées alphabétiquement.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> nom <span class="hljs-keyword">AS</span> focaccia
+<span class="hljs-keyword">FROM</span> focaccia
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> nom <span class="hljs-keyword">ASC</span>;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : Liste des 8 focaccias triées alphabétiquement</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test01/test01.pdf">Export PDF : tests/exports/test01/test01.pdf</a></li>
+<li><a href="/tests/exports/test01/test01.csv">Export CSV : tests/exports/test01/test01.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: Le résultat doit contenir exactement 8 lignes, cohérentes avec le seed.
+Aucun écart n’est constaté.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-02--afficher-le-nombre-total-dingr%C3%A9dients">🧩 Test 02 — Afficher le nombre total d'ingrédients</h2>
+<ul>
+<li>
+<p>But : Vérifier le peuplement de la table ingredient.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> nb_ingredients
+<span class="hljs-keyword">FROM</span> ingredient;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : Il doit y avoir 25 ingrédients, comme dans le fichier Excel fourni.</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test02/test02.pdf">Export PDF : tests/exports/test02/test02.pdf</a></li>
+<li><a href="/tests/exports/test02/test02.csv">Export CSV : tests/exports/test02/test02.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: Le résultat est bien égal à 25. Si le résultat avait été différent, cela aurait indiqué qu’un ingrédient a été oublié ou mal orthographié dans le seed.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-03--afficher-le-prix-moyen-des-focaccias">🧩 Test 03 — Afficher le prix moyen des focaccias</h2>
+<ul>
+<li>
+<p>But : Contrôler que les valeurs numériques sont bien interprétées et que l’agrégat AVG fonctionne.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ROUND</span>(<span class="hljs-keyword">AVG</span>(prix), <span class="hljs-number">2</span>) <span class="hljs-keyword">AS</span> prix_moyen_focaccia
+<span class="hljs-keyword">FROM</span> focaccia;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : Moyenne calculée sur les 8 prix insérés = 10.375 (arrondi selon MySQL =&gt; 2 chiffres apres la virgule)</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test03/test03.pdf">Export PDF : tests/exports/test03/test03.pdf</a></li>
+<li><a href="/tests/exports/test03/test03.csv">Export CSV : tests/exports/test03/test03.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: Le résultat obtenu est 10,38 ce qui correspond bien à la moyenne des prix arrondie au centième.
+Cela confirme que les prix sont correctement stockés et que l’agrégation fonctionne.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-04--afficher-la-liste-des-boissons-avec-leur-marque-tri%C3%A9e-par-nom-de-boisson">🧩 Test 04 — Afficher la liste des boissons avec leur marque, triée par nom de boisson</h2>
+<ul>
+<li>
+<p>But : Vérifier la jointure boisson → marque (relation N–1) et l’ordre alphabétique sur le nom de la boisson.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> b.nom <span class="hljs-keyword">AS</span> boisson, m.nom <span class="hljs-keyword">AS</span> marque
+<span class="hljs-keyword">FROM</span> boisson b
+<span class="hljs-keyword">JOIN</span> marque m <span class="hljs-keyword">ON</span> m.id = b.marque_id
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> b.nom <span class="hljs-keyword">ASC</span>;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : 12 lignes (toutes les boissons), chacune associée à la bonne marque, ordonnées par nom de boisson.</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test04/test04.pdf">Export PDF : tests/exports/test04/test04.pdf</a></li>
+<li><a href="/tests/exports/test04/test04.csv">Export CSV : tests/exports/test04/test04.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: Le résultat obtenu correspond à toutes les boissons, avec la bonne marque pour chacune. Aucune incohérence n’a été détectée.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-05--afficher-la-liste-des-ingr%C3%A9dients-pour-une-raclaccia">🧩 Test 05 — Afficher la liste des ingrédients pour une Raclaccia</h2>
+<ul>
+<li>
+<p>But : Tester une jointure N–N avec filtrage sur une focaccia particulière.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> i.nom <span class="hljs-keyword">AS</span> ingredient, fi.quantite
+<span class="hljs-keyword">FROM</span> focaccia f
+<span class="hljs-keyword">JOIN</span> focaccia_ingredient fi <span class="hljs-keyword">ON</span> fi.focaccia_id = f.id
+<span class="hljs-keyword">JOIN</span> ingredient i <span class="hljs-keyword">ON</span> i.id = fi.ingredient_id
+<span class="hljs-keyword">WHERE</span> f.nom = <span class="hljs-string">'Raclaccia'</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> i.nom <span class="hljs-keyword">ASC</span>;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : Les ingrédients de la Raclaccia :Base Tomate, Raclette, Cresson, Ail, Champignon, Parmesan, Poivre et leur quantitée.</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test05/test05.pdf">Export PDF : tests/exports/test05/test05.pdf</a></li>
+<li><a href="/tests/exports/test05/test05.csv">Export CSV : tests/exports/test05/test05.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: Les 7 ingrédients attendus de la Raclaccia, avec leurs quantités, ont bien été obtenus. Un écart indiquerait que le seed de la Raclaccia a été mal rempli.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-06--afficher-le-nom-et-le-nombre-dingr%C3%A9dients-pour-chaque-focaccia">🧩 Test 06 — Afficher le nom et le nombre d'ingrédients pour chaque focaccia</h2>
+<ul>
+<li>
+<p>But : Vérifier les relations N–N entre focaccia et ingredient, et s’assurer que chaque focaccia a bien un nombre cohérent d’ingrédients.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> f.nom <span class="hljs-keyword">AS</span> focaccia, <span class="hljs-keyword">COUNT</span>(fi.ingredient_id) <span class="hljs-keyword">AS</span> nb_ingredients
+<span class="hljs-keyword">FROM</span> focaccia f
+<span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> focaccia_ingredient fi <span class="hljs-keyword">ON</span> fi.focaccia_id = f.id
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> f.id, f.nom
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> nb_ingredients <span class="hljs-keyword">DESC</span>, f.nom <span class="hljs-keyword">ASC</span>;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : Chaque focaccia doit apparaître avec son nombre d'ingrédients (aucun NULL).</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test06/test06.pdf">Export PDF : tests/exports/test06/test06.pdf</a></li>
+<li><a href="/tests/exports/test06/test06.csv">Export CSV : tests/exports/test06/test06.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: Toutes les focaccias apparaissent avec un nombre d’ingrédients non nul. Une focaccia avec zéro ingrédient aurait révélé un seed incomplet.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-07--afficher-le-nom-de-la-focaccia-qui-a-le-plus-dingr%C3%A9dients">🧩 Test 07 — Afficher le nom de la focaccia qui a le plus d'ingrédients</h2>
+<ul>
+<li>
+<p>But : Identifier la focaccia la plus garnie en nombre d’ingrédients et vérifier la capacité à combiner GROUP BY + ORDER BY + LIMIT.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> f.nom <span class="hljs-keyword">AS</span> focaccia, <span class="hljs-keyword">COUNT</span>(fi.ingredient_id) <span class="hljs-keyword">AS</span> nb_ingredients
+<span class="hljs-keyword">FROM</span> focaccia f
+<span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> focaccia_ingredient fi <span class="hljs-keyword">ON</span> fi.focaccia_id = f.id
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> f.id, f.nom
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> nb_ingredients <span class="hljs-keyword">DESC</span>, f.nom <span class="hljs-keyword">ASC</span>
+<span class="hljs-keyword">LIMIT</span> <span class="hljs-number">1</span>;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : donner la focaccia la plus garnie et son nombre d'ingrédients (paysanne avec 12 ingrédients)</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test07/test07.pdf">Export PDF : tests/exports/test07/test07.pdf</a></li>
+<li><a href="/tests/exports/test07/test07.csv">Export CSV : tests/exports/test07/test07.csv</a></li>
+<li><a href="/tests/exports/test07/test07.txt">.txt : tests/exports/test07/test07.txt</a></li>
+<li><a href="/tests/exports/test07/test07.png">screen .png : tests/exports/test07/test07.png</a></li>
+</ul>
+</li>
+<li>Commentaire: À l’écran, phpMyAdmin affiche bien une seule ligne : « Paysanne / 12 ».
+Cependant, lors de l’export PDF/CSV, phpMyAdmin réexécute la requête sans prendre correctement en compte le LIMIT 1, ce qui produit une liste complète des focaccias triées par nombre d'ingrédients. Le fichier .txt (copie du presse-papiers) et la capture .png confirment que la requête renvoie bien « Paysanne / 12 » comme focaccia la plus garnie.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-08--afficher-la-liste-des-focaccia-qui-contiennent-de-lail">🧩 Test 08 — Afficher la liste des focaccia qui contiennent de l'ail</h2>
+<ul>
+<li>
+<p>But : Tester un filtre sur un ingrédient précis dans la table d’association.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> f.nom <span class="hljs-keyword">AS</span> focaccia
+<span class="hljs-keyword">FROM</span> focaccia f
+<span class="hljs-keyword">JOIN</span> focaccia_ingredient fi <span class="hljs-keyword">ON</span> fi.focaccia_id = f.id
+<span class="hljs-keyword">JOIN</span> ingredient i <span class="hljs-keyword">ON</span> i.id = fi.ingredient_id
+<span class="hljs-keyword">WHERE</span> i.nom = <span class="hljs-string">'Ail'</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> f.nom <span class="hljs-keyword">ASC</span>;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : les focaccias suivantes : Mozaccia, Gorgonzollaccia, Raclaccia et Paysanne.</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test08/test08.pdf">Export PDF : tests/exports/test08/test08.pdf</a></li>
+<li><a href="/tests/exports/test08/test08.csv">Export CSV : tests/exports/test08/test08.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: On obtient bien les 4 focaccias contenant de l’ail : Mozaccia, Gorgonzollaccia, Raclaccia et Paysanne. Une focaccia manquante ou en trop indiquerait un problème dans le seed ou une orthographe incohérente de l’ingrédient.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-09--afficher-la-liste-des-ingr%C3%A9dients-inutilis%C3%A9s">🧩 Test 09 — Afficher la liste des ingrédients inutilisés</h2>
+<ul>
+<li>
+<p>But : Vérifier la complétude du seed et repérer les ingrédients présents dans ingredient mais jamais liés à une focaccia.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> i.nom <span class="hljs-keyword">AS</span> ingredient_non_utilise
+<span class="hljs-keyword">FROM</span> ingredient i
+<span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> focaccia_ingredient fi <span class="hljs-keyword">ON</span> fi.ingredient_id = i.id
+<span class="hljs-keyword">WHERE</span> fi.ingredient_id <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> i.nom <span class="hljs-keyword">ASC</span>;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : Les 2 ingrédients non utilisés : Salami et Tomate cerise.</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test09/test09.pdf">Export PDF : tests/exports/test09/test09.pdf</a></li>
+<li><a href="/tests/exports/test09/test09.csv">Export CSV : tests/exports/test09/test09.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: Les ingrédients Salami et Tomate cerise n’apparaissent dans aucune focaccia. Ce test confirme que ces ingrédients sont bien présents dans la table ingredient mais jamais utilisés dans focaccia_ingredient.</li>
+</ul>
+<h2 id="%F0%9F%A7%A9-test-10--afficher-la-liste-des-focaccia-qui-nont-pas-de-champignons">🧩 Test 10 — Afficher la liste des focaccia qui n'ont pas de champignons</h2>
+<ul>
+<li>
+<p>But : Récupérer les focaccias qui n’utilisent pas l’ingrédient “Champignon”.</p>
+</li>
+<li>
+<p>Code SQL :</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> f.nom <span class="hljs-keyword">AS</span> focaccia_sans_champignon
+<span class="hljs-keyword">FROM</span> focaccia f
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> (
+  <span class="hljs-keyword">SELECT</span> <span class="hljs-number">1</span>
+  <span class="hljs-keyword">FROM</span> focaccia_ingredient fi
+  <span class="hljs-keyword">JOIN</span> ingredient i <span class="hljs-keyword">ON</span> i.id = fi.ingredient_id
+  <span class="hljs-keyword">WHERE</span> fi.focaccia_id = f.id
+    <span class="hljs-keyword">AND</span> i.nom = <span class="hljs-string">'Champignon'</span>
+)
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> f.nom <span class="hljs-keyword">ASC</span>;
+</div></code></pre>
+<ul>
+<li>Résultat attendu : les focaccias Américaine et Hawaienne.</li>
+<li>Résultat obtenu (preuve) :
+<ul>
+<li><a href="/tests/exports/test10/test10.pdf">Export PDF : tests/exports/test10/test10.pdf</a></li>
+<li><a href="/tests/exports/test10/test10.csv">Export CSV : tests/exports/test10/test10.csv</a></li>
+</ul>
+</li>
+<li>Commentaire: Le résultat contient bien les focaccias Américaine et Hawaienne. Une focaccia manquante ou en trop aurait indiqué un problème dans le seed ou dans la requête. L’utilisation de NOT EXISTS permet d’éviter les pièges possibles de NOT IN en présence de valeurs NULL.</li>
+</ul>
+
+</body>
+</html>
