@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS menu (
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
+  
 /* menu_id est NULL pour ne pas casser les données actuelles (table menu vide).
 Quand la table menu auras des menus, on passe cette colonne en NOT NULL */
 ALTER TABLE focaccia
