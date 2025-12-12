@@ -1,3 +1,17 @@
+-- Sélectionner la base Tifosi (la base doit exister)
+USE tifosi;
+
+-- 0 Suppression des tables dans l'ordre inverse des dépendances (FK)
+DROP TABLE IF EXISTS achat;
+DROP TABLE IF EXISTS menu_boisson;
+DROP TABLE IF EXISTS focaccia_ingredient;
+DROP TABLE IF EXISTS boisson;
+DROP TABLE IF EXISTS focaccia;
+DROP TABLE IF EXISTS ingredient;
+DROP TABLE IF EXISTS menu;
+DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS marque;
+
 -- 1 Table: marque
 -- Règles simples : id auto-incrémenté, nom unique, timestamps utiles
 CREATE TABLE IF NOT EXISTS marque (
