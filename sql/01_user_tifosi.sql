@@ -2,7 +2,9 @@
 -- À exécuter avec un compte ayant les droits administrateur (ex : root).
 -- Nécessite que la base "tifosi" existe déjà (voir 00_create_database.sql).
 
--- 1) Création de l'utilisateur applicatif (mot de passe pédagogique à changer en contexte réel)  
+-- 0) Supprimer l'utilisateur MySQL "tifosi" s'il existe
+DROP USER IF EXISTS 'tifosi'@'localhost';
+-- 1) Création de l'utilisateur applicatif (mot de passe pédagogique a changer en contexte réel)  
 CREATE USER IF NOT EXISTS 'tifosi'@'localhost'
   IDENTIFIED BY 'ChangeMe!123';
 
