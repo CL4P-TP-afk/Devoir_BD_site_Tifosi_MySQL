@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS marque (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
---2 Table: ingredient
+-- 2 Table: ingredient
 CREATE TABLE IF NOT EXISTS ingredient (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom VARCHAR(50) NOT NULL,
@@ -37,21 +37,24 @@ CREATE TABLE IF NOT EXISTS ingredient (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
---3 Table: focaccia
+-- 3 Table: focaccia
 CREATE TABLE IF NOT EXISTS focaccia (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom VARCHAR(50) NOT NULL,
   prix DECIMAL(5,2) NOT NULL,
+  menu_id BIGINT UNSIGNED NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY uq_focaccia_nom (nom),
-  KEY idx_focaccia_prix (prix)
+  KEY idx_focaccia_prix (prix),
+  KEY idx_focaccia_menu (menu_id)
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
---4 Table: boisson
+
+-- 4 Table: boisson
 CREATE TABLE IF NOT EXISTS boisson (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom VARCHAR(50) NOT NULL,
@@ -69,7 +72,7 @@ CREATE TABLE IF NOT EXISTS boisson (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
---5 Table: focaccia_ingredient
+-- 5 Table: focaccia_ingredient
 -- Association N–N entre focaccia et ingredient, avec attribut quantite
 CREATE TABLE IF NOT EXISTS focaccia_ingredient (
   focaccia_id BIGINT UNSIGNED NOT NULL,
@@ -117,9 +120,6 @@ CREATE TABLE IF NOT EXISTS menu (
   
 /* menu_id est NULL pour ne pas casser les données actuelles (table menu vide).
 Quand la table menu auras des menus, on passe cette colonne en NOT NULL */
-ALTER TABLE focaccia
-  ADD COLUMN IF NOT EXISTS menu_id BIGINT UNSIGNED NULL;
-
 ALTER TABLE focaccia
   ADD CONSTRAINT fk_focaccia_menu
     FOREIGN KEY (menu_id) REFERENCES menu(id)
