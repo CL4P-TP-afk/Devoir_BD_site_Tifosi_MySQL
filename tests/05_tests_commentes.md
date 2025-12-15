@@ -138,11 +138,11 @@ JOIN ingredient i ON i.id = fi.ingredient_id
 WHERE i.nom = 'Ail'
 ORDER BY f.nom ASC;
 ```
-- Résultat attendu : les focaccias suivantes : Mozaccia, Gorgonzollaccia, Raclaccia et Paysanne.
+- Résultat attendu : les focaccias suivantes : Gorgonzollaccia, Mozaccia, Paysanne et Raclaccia.
 - Résultat obtenu (preuve) :
   + [Export PDF : tests/exports/test08/test08.pdf](/tests/exports/test08/test08.pdf)
   + [Export CSV : tests/exports/test08/test08.csv](/tests/exports/test08/test08.csv)
-- Commentaire: On obtient bien les 4 focaccias contenant de l’ail : Mozaccia, Gorgonzollaccia, Raclaccia et Paysanne. Une focaccia manquante ou en trop indiquerait un problème dans le seed ou une orthographe incohérente de l’ingrédient.
+- Commentaire: On obtient bien les 4 focaccias contenant de l’ail : Gorgonzollaccia, Mozaccia, Paysanne et Raclaccia. Une focaccia manquante ou en trop indiquerait un problème dans le seed ou une orthographe incohérente de l’ingrédient.
 
 ## 🧩 Test 09 — Afficher la liste des ingrédients inutilisés
 - But : Vérifier la complétude du seed et repérer les ingrédients présents dans ingredient mais jamais liés à une focaccia.
