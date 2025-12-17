@@ -1,7 +1,9 @@
 -- Sélectionner la base Tifosi (la base doit exister)
 USE tifosi;
 
--- 0 Suppression des tables dans l'ordre inverse des dépendances (FK)
+-- 0 Suppression des tables dans l'ordre inverse des dépendances
+-- (tables enfants puis tables parentes, afin de respecter les clés étrangères)
+
 DROP TABLE IF EXISTS achat;
 DROP TABLE IF EXISTS menu_boisson;
 DROP TABLE IF EXISTS focaccia_ingredient;
@@ -118,8 +120,17 @@ CREATE TABLE IF NOT EXISTS menu (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
   
-/* menu_id est NULL pour ne pas casser les données actuelles (table menu vide).
-Quand la table menu auras des menus, on passe cette colonne en NOT NULL */
+/* 
+La colonne menu_id est définie comme NULL afin de permettre l'existence
+de focaccias sans menu associé (table menu initialement vide).
+
+La règle ON DELETE SET NULL permet de conserver les focaccias
+si un menu est supprimé, en supprimant simplement l'association.
+
+Dans un contexte applicatif final, cette colonne pourrait devenir NOT NULL
+si chaque focaccia devait obligatoirement appartenir à un menu.
+*/
+
 ALTER TABLE focaccia
   ADD CONSTRAINT fk_focaccia_menu
     FOREIGN KEY (menu_id) REFERENCES menu(id)
